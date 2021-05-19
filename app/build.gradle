@@ -45,6 +45,7 @@ android {
         localTest {
             dimension "releaseType"
 
+            applicationIdSuffix ".demo"
             versionName "0.1.0"
             buildConfigField 'String', 'BASE_URL', '"https://apitest.com.br/"'
         }
