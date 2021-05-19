@@ -230,12 +230,53 @@ class ChainedListTest {
     @Test
     fun chainedList_iterateAddingOne_listWithEachItemAddedOneReturned() {
         val result = SUT.add(12).add(5).add(9).add(3)
-        val replacement = ChainedList(4).add(13).add(6).add(10).add(4)
+        val iterated = ChainedList(4).add(13).add(6).add(10).add(4)
 
         result.forEach {
             it.item++
         }
 
-        assertTrue(result.exactlyTo(replacement))
+        assertTrue(result.exactlyTo(iterated))
+    }
+
+    @Test
+    fun chainedList_addAtBeginning_listWithItemAdded() {
+        val result = SUT.add(4).add(5).add(9)
+        val replaced = ChainedList(12).add(3).add(4).add(5).add(9)
+
+        assertTrue(result.addAt(0, 12).exactlyTo(replaced))
+    }
+
+    @Test
+    fun chainedList_addAtMiddle_listWithItemAdded() {
+        val result = SUT.add(4).add(5).add(9)
+        val replaced = ChainedList(3).add(4).add(12).add(5).add(9)
+
+        assertTrue(result.addAt(2, 12).exactlyTo(replaced))
+    }
+
+    @Test
+    fun chainedList_addAtRightBeforeEnding_listWithItemAdded() {
+        val result = SUT.add(4).add(5).add(9)
+        val replaced = ChainedList(3).add(4).add(5).add(12).add(9)
+
+        assertTrue(result.addAt(3, 12).exactlyTo(replaced))
+    }
+
+    @Test
+    fun chainedList_addAtEnding_listWithItemAdded() {
+        val result = SUT.add(4).add(5).add(9)
+        val replaced = ChainedList(3).add(4).add(5).add(9).add(12)
+
+        assertTrue(result.addAt(4, 12).exactlyTo(replaced))
+    }
+
+    @Test
+    fun chainedList_addOutOfIndex_exceptionThrown() {
+        val result = SUT.add(4).add(5).add(9)
+
+        assertThrows(IndexOutOfBoundsException::class.java) {
+            result.addAt(5, 12)
+        }
     }
 }

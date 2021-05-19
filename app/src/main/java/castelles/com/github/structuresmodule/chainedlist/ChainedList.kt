@@ -31,17 +31,35 @@ class ChainedList<T>(
         return this
     }
 
-    fun addAt(index: Int, item: T) {
+    fun addAt(index: Int, item: T): ChainedList<T> {
 
-        if (index > size()) throw IndexOutOfBoundsException()
-        else {
-            val counter = 0
-            forEach {
-                if (counter == index) {
-
+        when {
+            index > size() -> throw IndexOutOfBoundsException()
+            index == size() -> { add(item) }
+            else -> {
+                var counter = 0
+                var temp: ChainedList<T>? = this
+                forEach {
+                    if (counter == 0) {
+                        if (counter == index) {
+                            val chain = ChainedList(item)
+                            chain.next = this
+                            return chain
+                        }
+                    } else {
+                        if (counter == index) {
+                            val chain = ChainedList(item)
+                            temp?.next = chain
+                            chain.next = it
+                        } else {
+                            temp = temp?.next
+                        }
+                    }
+                    counter++
                 }
             }
         }
+        return this
     }
 
     fun contains(item: T): Boolean {

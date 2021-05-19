@@ -6,6 +6,7 @@ plugins {
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
+    flavorDimensions "releaseType"
 
     defaultConfig {
         applicationId "castelles.com.github.structuresmodule"
@@ -15,6 +16,8 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField 'String', 'BASE_URL', '"https://apidev.com.br/"'
     }
 
     buildTypes {
@@ -23,13 +26,31 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
+    productFlavors {
+
+        dev {
+            dimension "releaseType"
+        }
+
+        localTest {
+            dimension "releaseType"
+
+            versionName "0.1.0"
+            buildConfigField 'String', 'BASE_URL', '"https://apitest.com.br/"'
+        }
+
+    }
+
 }
 
 dependencies {
