@@ -4,13 +4,13 @@ import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
 
-class NubankChallengeTest {
+class ArrayChallengeTest {
 
-    private lateinit var challenge: NubankChallenge
+    private lateinit var challenge: ArrayChallenge
 
     @Before
     fun setUp() {
-        challenge = NubankChallenge()
+        challenge = ArrayChallenge()
     }
 
     @Test

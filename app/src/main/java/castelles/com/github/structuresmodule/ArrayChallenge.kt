@@ -2,7 +2,7 @@ package castelles.com.github.structuresmodule
 
 import android.util.Log
 
-class NubankChallenge {
+class ArrayChallenge {
 
     data class Pontos(
         val pontuacao: Int,
