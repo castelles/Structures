@@ -66,5 +66,5 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
     // DIMENS LAYOUT
-    implementation "com.intuit.sdp:sdp-android:$dimensLayout"
+    implementation "com.intuit.sdp:sdp-android:1.0.5"
 }
