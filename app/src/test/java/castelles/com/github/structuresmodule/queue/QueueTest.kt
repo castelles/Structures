@@ -2,6 +2,7 @@ package castelles.com.github.structuresmodule.queue
 
 import junit.framework.Assert.assertEquals
 import junit.framework.TestCase
+import org.junit.Assert
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
@@ -63,4 +64,39 @@ class QueueTest {
         }
     }
 
+    @Test
+    fun getSize_queueWithOneElement() {
+        Assert.assertEquals(1, SUT.size())
+    }
+
+    @Test
+    fun getSize_queueWithTwoElements() {
+        SUT.apply {
+            insert(4)
+        }
+        Assert.assertEquals(2, SUT.size())
+    }
+
+    @Test
+    fun getSize_queueWithMultipleElements() {
+        SUT.apply {
+            insert(4)
+            insert(5)
+            insert(6)
+        }
+        Assert.assertEquals(4, SUT.size())
+    }
+
+    @Test
+    fun getSizeFromMiddleElement_IOExceptionThrows() {
+        SUT.apply {
+            insert(4)
+            insert(5)
+            insert(6)
+        }
+
+        assertThrows(IOException::class.java) {
+            SUT.next?.next?.size()
+        }
+    }
 }

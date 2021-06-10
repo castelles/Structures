@@ -40,4 +40,23 @@ class Queue<T>(
         iteratorBefore!!.next = null
     }
 
+    @Throws(IOException::class)
+    fun size(): Int {
+        if (this.isFirst) {
+            var size = 0
+            forEach {
+                size++
+            }
+            return size
+        } else throw IOException("Cannot get size from a middle item.")
+    }
+
+    fun forEach(iterator: (Queue<T>) -> Unit) {
+        var iteratorItem: Queue<T>? = this
+        while (iteratorItem != null) {
+            iterator(iteratorItem)
+            iteratorItem = iteratorItem.next
+        }
+    }
+
 }
